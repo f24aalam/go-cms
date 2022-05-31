@@ -8,9 +8,11 @@
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body>
+        {{ partial "partials/header" .}}
+
         {{ template "content" . }}
 
-        <footer>{{ partial "partials/footer" .}}</footer>
+        {{ partial "partials/footer" .}}
         <script src="/js/app.js"></script>
     </body>
 </html>
