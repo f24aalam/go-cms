@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.17.12",
+    "@tailwindcss/forms": "^0.5.2",
     "autoprefixer": "^10.4.7",
     "laravel-mix": "^6.0.43",
     "postcss": "^8.4.14",

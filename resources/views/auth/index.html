@@ -1,0 +1,18 @@
+<div class="h-screen flex justify-center items-center bg-blue-50">
+    <div class="shadow rounded px-10 py-4 bg-white border-t-4 border-blue-900">
+        <h1 class="text-2xl mb-4">Login</h1>
+        <form action="/login" method="post">
+            <div class="flex flex-col gap-1 mb-4">
+                <label for="email">Email</label>
+                <input class="rounded" type="email" name="email" id="email" placeholder="Enter Email">
+            </div>
+            <div class="flex flex-col gap-1 mb-4">
+                <label for="password">Password</label>
+                <input class="rounded" type="password" name="password" id="password" placeholder="Enter Password">
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-900 text-white px-6 py-2 rounded">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

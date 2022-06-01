@@ -5,7 +5,7 @@ import "github.com/kataras/iris/v12"
 type HomeController struct {
 }
 
-func (c *HomeController) Index(ctx iris.Context) {
+func (c *HomeController) Get(ctx iris.Context) {
 	data := iris.Map{
 		"Title": "Index",
 	}
