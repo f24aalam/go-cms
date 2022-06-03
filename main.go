@@ -6,15 +6,18 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
+	"github.com/kataras/iris/v12/sessions"
 )
 
 func main() {
 	v := validator.New()
+	s := sessions.New(sessions.Config{Cookie: "go-cms-sessions-cookie"})
 
 	app := iris.New()
 
 	app.Validator = v
 
+	app.Use(s.Handler())
 	app.RegisterView(iris.Blocks("./resources/views", ".html").Reload(true))
 	app.HandleDir("/", iris.Dir("./public"))
 

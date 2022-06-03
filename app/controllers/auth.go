@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/sessions"
 )
 
 type loginForm struct {
@@ -19,6 +20,18 @@ func (c *AuthController) GetLogin(ctx iris.Context) {
 		"Title": "Login",
 	}
 
+	s := sessions.Get(ctx)
+	if s != nil {
+		if s.HasFlash() {
+			var errors validator.ValidationErrors = (s.GetFlash("errors")).(validator.ValidationErrors)
+			fmt.Println(errors[0].Tag())
+			if len(errors) > 0 {
+				data["Errors"] = errors
+			}
+
+		}
+	}
+
 	ctx.ViewLayout("auth")
 	ctx.View("auth/index", data)
 }
@@ -29,14 +42,12 @@ func (c *AuthController) PostLogin(ctx iris.Context) {
 
 	if err != nil {
 		if _, ok := err.(*validator.InvalidValidationError); ok {
-			ctx.StatusCode(iris.StatusInternalServerError)
 			ctx.WriteString(err.Error())
 			return
 		}
 
-		ctx.StatusCode(iris.StatusBadRequest)
-		fmt.Println(err.(validator.ValidationErrors))
+		s := sessions.Get(ctx)
+		s.SetFlash("errors", err.(validator.ValidationErrors))
+		ctx.Redirect(ctx.GetCurrentRoute().Path())
 	}
-
-	fmt.Println(form)
 }
