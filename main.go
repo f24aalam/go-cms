@@ -15,6 +15,8 @@ func main() {
 
 	app := iris.New()
 
+	app.I18n.Load("./resources/locales/*/*", "en")
+
 	app.Validator = v
 
 	app.Use(s.Handler())

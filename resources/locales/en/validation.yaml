@@ -1,0 +1,2 @@
+required: "The %s is required field."
+email: "The field is not a valid email address."
